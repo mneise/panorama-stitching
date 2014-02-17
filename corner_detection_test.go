@@ -18,8 +18,8 @@ func TestLoadImage(t *testing.T) {
 
 func TestWindowAt(t *testing.T) {
 
-	window := windowAt(image.ZP)
-	if window != nil {
+	window, success := windowAt(image.ZP)
+	if success {
 		t.Errorf("window at %v should not exist, but got %v", image.ZP, window)
 	}
 
