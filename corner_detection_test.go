@@ -19,7 +19,9 @@ func TestLoadImage(t *testing.T) {
 
 func TestWindowAt(t *testing.T) {
 
-	window, success := windowAt(image.ZP)
+	padding := 1
+	i := LoadImage(filepath.FromSlash("resources/images/5x5-clear.png"))
+	window, success := windowAt(image.ZP, i, padding)
 	if success {
 		t.Errorf("window at %v should not exist, but got %v", image.ZP, window)
 	}
@@ -27,7 +29,9 @@ func TestWindowAt(t *testing.T) {
 
 func TestWindowAt2(t *testing.T) {
 
-	window, _ := windowAt(image.Point{1, 1})
+	padding := 1
+	i := LoadImage(filepath.FromSlash("resources/images/5x5-clear.png"))
+	window, _ := windowAt(image.Point{1, 1}, i, padding)
 	neighbourCount := 8
 
 	if len(window) != neighbourCount {

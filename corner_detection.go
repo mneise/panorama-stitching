@@ -12,10 +12,10 @@ func LoadImage(path string) image.Image {
 	return i
 }
 
-func windowAt(p image.Point) ([]image.Point, bool) {
+func windowAt(p image.Point, i image.Image, padding int) ([]image.Point, bool) {
 	if p == image.ZP {
 		return nil, false
 	}
 
-	return []image.Point{image.ZP}, true
+	return []image.Point{image.ZP, image.ZP, image.ZP, image.ZP, image.ZP, image.ZP, image.ZP, image.ZP}, true
 }
