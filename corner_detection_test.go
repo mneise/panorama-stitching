@@ -66,3 +66,26 @@ func TestWindowAtForEdgePoints(t *testing.T) {
 		}
 	}
 }
+
+func TestWindowCorrectPoints(t *testing.T) {
+	padding := 1
+	i := LoadImage(filepath.FromSlash("resources/images/5x5-clear.png"))
+
+	correctPoints := []image.Point{
+		image.Point{0, 2}, image.Point{1, 2}, image.Point{2, 2},
+		image.Point{0, 1}, image.Point{2, 1}, image.Point{0, 0},
+		image.Point{1, 0}, image.Point{2, 0}}
+
+	point := image.Point{1, 1}
+	window, success := windowAt(point, i, padding)
+
+	if !success {
+		t.Errorf("Should successfully return window points for point %v", point)
+	}
+
+	for _, neighbourPoint := range correctPoints {
+		if !Contains(window, neighbourPoint) {
+			t.Errorf("Window doesn't contain point %v", neighbourPoint)
+		}
+	}
+}

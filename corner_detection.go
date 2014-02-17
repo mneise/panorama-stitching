@@ -26,3 +26,8 @@ func windowAt(p image.Point, i image.Image, padding int) ([]image.Point, bool) {
 
 	return []image.Point{image.ZP, image.ZP, image.ZP, image.ZP, image.ZP, image.ZP, image.ZP, image.ZP}, true
 }
+
+func Contains(list []image.Point, elem image.Point) bool {
+        for _, t := range list { if t == elem { return true } }
+        return false
+}
