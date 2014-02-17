@@ -17,5 +17,12 @@ func windowAt(p image.Point, i image.Image, padding int) ([]image.Point, bool) {
 		return nil, false
 	}
 
+	bounds := i.Bounds()
+
+	if p.X - padding < bounds.Min.X || p.X + padding > bounds.Max.X ||
+       p.Y - padding < bounds.Min.Y || p.Y + padding > bounds.Max.Y {
+		return nil, false
+	}
+
 	return []image.Point{image.ZP, image.ZP, image.ZP, image.ZP, image.ZP, image.ZP, image.ZP, image.ZP}, true
 }
