@@ -13,21 +13,32 @@ func LoadImage(path string) image.Image {
 }
 
 func windowAt(p image.Point, i image.Image, padding int) ([]image.Point, bool) {
-	if p == image.ZP {
-		return nil, false
-	}
-
 	bounds := i.Bounds()
 
-	if p.X - padding < bounds.Min.X || p.X + padding > bounds.Max.X ||
-       p.Y - padding < bounds.Min.Y || p.Y + padding > bounds.Max.Y {
+	if p.X-padding < bounds.Min.X || p.X+padding > bounds.Max.X ||
+		p.Y-padding < bounds.Min.Y || p.Y+padding > bounds.Max.Y {
 		return nil, false
 	}
 
-	return []image.Point{image.ZP, image.ZP, image.ZP, image.ZP, image.ZP, image.ZP, image.ZP, image.ZP}, true
+	var points []image.Point
+	points = make([]image.Point, 9)
+
+	index := 0
+	for y := p.Y - padding; y <= p.Y+padding; y++ {
+		for x := p.X - padding; x <= p.X+padding; x++ {
+			points[index] = image.Point{x, y}
+			index++
+		}
+	}
+
+	return points, true
 }
 
 func Contains(list []image.Point, elem image.Point) bool {
-        for _, t := range list { if t == elem { return true } }
-        return false
+	for _, t := range list {
+		if t == elem {
+			return true
+		}
+	}
+	return false
 }

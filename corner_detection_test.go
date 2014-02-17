@@ -32,7 +32,7 @@ func TestWindowAtSize(t *testing.T) {
 	padding := 1
 	i := LoadImage(filepath.FromSlash("resources/images/5x5-clear.png"))
 	window, _ := windowAt(image.Point{1, 1}, i, padding)
-	neighbourCount := 8
+	neighbourCount := 9
 
 	if len(window) != neighbourCount {
 		t.Errorf("Expected %v image points, but got %v", neighbourCount, len(window))
@@ -73,8 +73,8 @@ func TestWindowCorrectPoints(t *testing.T) {
 
 	correctPoints := []image.Point{
 		image.Point{0, 2}, image.Point{1, 2}, image.Point{2, 2},
-		image.Point{0, 1}, image.Point{2, 1}, image.Point{0, 0},
-		image.Point{1, 0}, image.Point{2, 0}}
+		image.Point{0, 1}, image.Point{1, 1}, image.Point{2, 1},
+		image.Point{0, 0}, image.Point{1, 0}, image.Point{2, 0}}
 
 	point := image.Point{1, 1}
 	window, success := windowAt(point, i, padding)
