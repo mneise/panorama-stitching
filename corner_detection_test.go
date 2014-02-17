@@ -38,3 +38,33 @@ func TestWindowAt2(t *testing.T) {
 		t.Errorf("Expected %v image points, but got %v", neighbourCount, len(window))
 	}
 }
+
+func TestWindowAtForEdgePoints(t *testing.T) {
+
+	padding := 2
+	i := LoadImage(filepath.FromSlash("resources/images/5x5-clear.png"))
+	bounds := i.Bounds()
+
+	// top and bottom row
+	for y := range []int{bounds.Min.Y, bounds.Min.Y + 1, bounds.Max.Y, bounds.Max.Y + 1} {
+		for x := bounds.Min.X; x <= bounds.Max.X; x++ {
+			window, success := windowAt(image.Point{x, y}, i, padding)
+
+			if !success || len(window) != 0 {
+				t.Errorf("Expected 0 image points, but got %v", len(window))
+			}
+		}
+	}
+
+	// left and right edge
+	for x := range []int{bounds.Min.X, bounds.Min.X + 1, bounds.Max.X, bounds.Max.X + 1} {
+		for y := bounds.Min.Y; y <= bounds.Max.Y; y++ {
+			window, success := windowAt(image.Point{x, y}, i, padding)
+
+			if !success || len(window) != 0 {
+				t.Errorf("Expected 0 image points, but got %v", len(window))
+			}
+		}
+	}
+
+}
