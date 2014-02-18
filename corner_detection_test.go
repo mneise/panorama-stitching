@@ -3,6 +3,7 @@ package cornerdetection
 import "image"
 import "path/filepath"
 import "testing"
+import "math"
 
 func TestLoadImage(t *testing.T) {
 
@@ -100,5 +101,17 @@ func TestSobelBase(t *testing.T) {
 	if success {
 		t.Errorf("Expected no magnitude in 0,0, but got %v", mag)
 	}
+}
 
+func TestSobelPositive(t *testing.T) {
+
+	i := LoadImage(filepath.FromSlash("resources/images/5x5-centered-dot.png"))
+
+	expectedMagnitude := math.Sqrt(math.Pow(-2*255, 2))
+	point := image.Point{1, 2}
+	mag, success := Sobel(point, i)
+
+	if !success || mag != expectedMagnitude {
+		t.Errorf("Expected magnitude in 1,1 but got %v", mag)
+	}
 }
