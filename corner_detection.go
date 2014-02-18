@@ -42,3 +42,12 @@ func Contains(list []image.Point, elem image.Point) bool {
 	}
 	return false
 }
+
+func Sobel(point image.Point, i image.Image) (int, bool){
+
+	if point == image.ZP {
+		return 0, false
+	}
+
+	return 0, true
+}
