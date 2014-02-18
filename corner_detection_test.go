@@ -112,6 +112,6 @@ func TestSobelPositive(t *testing.T) {
 	mag, success := Sobel(point, i)
 
 	if !success || mag != expectedMagnitude {
-		t.Errorf("Expected magnitude in 1,1 but got %v", mag)
+		t.Errorf("Expected magnitude %v in 1,1 but got %v", expectedMagnitude, mag)
 	}
 }
