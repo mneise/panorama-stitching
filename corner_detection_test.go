@@ -89,3 +89,16 @@ func TestWindowCorrectPoints(t *testing.T) {
 		}
 	}
 }
+
+func TestSobelBase(t *testing.T) {
+
+	i := LoadImage(filepath.FromSlash("resources/images/5x5-clear.png"))
+
+	point := image.Point{0, 0}
+	mag, success := Sobel(point, i)
+
+	if success {
+		t.Errorf("Expected no magnitude in 0,0, but got %v", mag)
+	}
+
+}
