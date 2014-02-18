@@ -115,3 +115,28 @@ func TestSobelPositive(t *testing.T) {
 		t.Errorf("Expected magnitude %v in 1,1 but got %v", expectedMagnitude, mag)
 	}
 }
+
+func TestSobelNegative(t *testing.T) {
+	i := LoadImage(filepath.FromSlash("resources/images/5x5-clear.png"))
+	bounds := i.Bounds()
+
+	// top and bottom row
+	for _, y := range []int{bounds.Min.Y, bounds.Max.Y} {
+		for x := bounds.Min.X; x <= bounds.Max.X; x++ {
+			_, success := Sobel(image.Point{x, y}, i)
+			if success {
+				t.Errorf("Expected no magnitude, but got success for point %v", image.Point{x, y})
+			}
+		}
+	}
+
+	// left and right edge
+	for _, x := range []int{bounds.Min.X, bounds.Max.X} {
+		for y := bounds.Min.Y; y <= bounds.Max.Y; y++ {
+			_, success := Sobel(image.Point{x, y}, i)
+			if success {
+				t.Errorf("Expected no magnitude, but got success for point %v", image.Point{x, y})
+			}
+		}
+	}
+}
